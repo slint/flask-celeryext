@@ -17,28 +17,21 @@ cache:
   - pip
 
 env:
-  - REQUIREMENTS=lowest
   - REQUIREMENTS=release
-  - REQUIREMENTS=devel
 
 dist: xenial   # required for Python >= 3.7
 
 python:
   - "2.7"
   - "3.5"
+  - "3.6"
   - "3.7"
-  - "pypy"
-
-matrix:
-  allow_failures:
-    - python: pypy
+  - "3.8"
 
 before_install:
   - "travis_retry pip install --upgrade pip setuptools py"
   - "travis_retry pip install twine wheel coveralls requirements-builder"
-  - "requirements-builder --level=min setup.py > .travis-lowest-requirements.txt"
   - "requirements-builder --level=pypi setup.py > .travis-release-requirements.txt"
-  - "requirements-builder --level=dev --req requirements-devel.txt setup.py > .travis-devel-requirements.txt"
 
 install:
   - "travis_retry pip install -r .travis-${REQUIREMENTS}-requirements.txt"
