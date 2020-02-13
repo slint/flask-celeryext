@@ -47,7 +47,7 @@ setup_requires = [
 
 install_requires = [
     'Flask>=0.10',
-    'celery>=3.1;python_version<"3.7"',
+    'celery>=3.1,<4.4;python_version<"3.7"',
     'celery>=4.3;python_version=="3.7"',
     'celery>=4.4;python_version=="3.8"',
 ]
@@ -93,6 +93,9 @@ setup(
         'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.5',
+        'Programming Language :: Python :: 3.6',
+        'Programming Language :: Python :: 3.7',
+        'Programming Language :: Python :: 3.8',
         'Development Status :: 5 - Production/Stable',
     ],
 )
