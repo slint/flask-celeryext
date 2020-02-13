@@ -48,6 +48,7 @@ install_requires = [
     'Flask>=0.10',
     'celery>=3.1;python_version<"3.7"',
     'celery>=4.3;python_version=="3.7"',
+    'celery>=4.4;python_version=="3.8"',
 ]
 
 packages = find_packages()

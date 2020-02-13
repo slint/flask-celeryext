@@ -19,7 +19,20 @@ cache:
 env:
   - REQUIREMENTS=release
 
+services:
+  - redis
+
+addons:
+  apt:
+    packages:
+      - rabbitmq-server
+
 dist: xenial   # required for Python >= 3.7
+
+env:
+  matrix:
+    - REQUIREMENTS=release BROKER_URL=redis://localhost:6379/0
+    - REQUIREMENTS=release BROKER_URL=amqp://localhost:5672//
 
 python:
   - "2.7"
