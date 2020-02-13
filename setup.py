@@ -27,6 +27,7 @@ tests_require = [
     'pytest-pep8>=1.0.6',
     'pytest>=2.8.0',
     'pytest-mock>=1.6.0',
+    'redis>=2.10.0',
 ]
 
 extras_require = {

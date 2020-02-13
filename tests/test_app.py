@@ -12,6 +12,8 @@
 
 from __future__ import absolute_import, print_function
 
+import os
+
 import pytest
 from celery import Celery
 from celery.utils.log import get_task_logger
@@ -185,3 +187,23 @@ def test_subtask_and_eager_dont_create_new_app_context(mocker):
     r = maintask.delay()
     assert r.result == "myapp"
     assert spy.call_count == 1
+
+
+def test_backend():
+    """Test execution of Celery task with application context."""
+    app = Flask("myapp")
+    app.config.from_object(eager_conf)
+    app.config['BROKER_URL'] = os.environ.get('BROKER_URL')
+
+    # Set the current Celery application
+    c = Celery('mycurrent')
+    c.set_current()
+
+    celery = create_celery_app(app)
+
+    @celery.task
+    def appctx():
+        return current_app.name
+
+    r = appctx.delay()
+    assert r.result == "myapp"
